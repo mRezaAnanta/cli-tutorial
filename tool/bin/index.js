@@ -39,6 +39,11 @@ function getArgs(input) {
 
 getArgs(process.argv)
 
+const commandList = {
+  '--start': 'boolean',
+  '--build': 'boolean',
+}
+
 module.exports = {
   getArgs
 }
