@@ -44,6 +44,20 @@ const commandList = {
   '--build': 'boolean',
 }
 
+function checkArg(args, commandList) {
+  const exist = []
+  const notExist = []
+
+  Object.entries(args).map(([key, value], index) => {
+    if(!commandList.hasOwnProperty(key)) {
+      notExist.push(`${index}. ${key}: ${value} (${typeof value})`)
+    } else {
+      exist.push(`${index}. ${key}: ${value} (${typeof value})`)
+    }
+  })
+  console.log(exist, notExist)
+}
+
 module.exports = {
   getArgs
 }
