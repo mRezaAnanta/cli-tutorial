@@ -12,10 +12,9 @@ function getArgs(input) {
   input.map((args, index) => {
     // console.log(args, index)
     if(args.slice(0, 2) === "--") {
-      // arr.push(args)
       const arg = args.split("=")
       // console.log(arg)
-      const argFlag = arg[0].slice(2)
+      const argFlag = arg[0]
       // console.log(argFlag)
       const argValue = arg.length > 1 ? arg[1] : true
       // console.log(argValue)
@@ -59,5 +58,7 @@ function checkArg(args, commandList) {
 }
 
 module.exports = {
-  getArgs
+  getArgs,
+  checkArg,
+  commandList,
 }
