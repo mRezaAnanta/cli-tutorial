@@ -41,14 +41,34 @@ function getArgs(input) {
 getArgs(process.argv)
 
 function checkArg(args, commandList) {
+function checkArg(args, availableCommand) {
   const exist = []
   const notExist = []
+  const argList = []
 
-  Object.entries(args).map(([key, value], index) => {
-    if(!commandList.hasOwnProperty(key)) {
-      notExist.push(`${index}. ${key}: ${value} (${typeof value})`)
+  for (const [key, value] of Object.entries(args)) {
+    if (!availableCommand.hasOwnProperty(key) && key != 'arg') {
+      notExist.push(key)
+    } else if (key == 'arg'){
+      argList.push(key)
     } else {
-      exist.push(`${index}. ${key}: ${value} (${typeof value})`)
+      exist.push(key)
+    }
+  }
+
+  if (exist.length > 0 && argList.length > 0){
+    return (exist, argList)
+  } else if (exist.length > 0) {
+    return exist
+  } else if (argList.length > 0) {
+    return argList
+  } else {
+    return notExist
+  }
+}
+
+}
+
     }
   })
 }
