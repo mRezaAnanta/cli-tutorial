@@ -38,9 +38,6 @@ function getArgs(input) {
   return obj
 }
 
-getArgs(process.argv)
-
-function checkArg(args, commandList) {
 function checkArg(args, availableCommand) {
   const exist = []
   const notExist = []
@@ -49,21 +46,22 @@ function checkArg(args, availableCommand) {
   for (const [key, value] of Object.entries(args)) {
     if (!availableCommand.hasOwnProperty(key) && key != 'arg') {
       notExist.push(key)
-    } else if (key == 'arg'){
-      argList.push(key)
-    } else {
+    } else if (key != 'arg') {
       exist.push(key)
+    } else if (value.length > 0){
+      argList.push(...value)
     }
   }
 
   if (exist.length > 0 && argList.length > 0){
     return (exist, argList)
+    return [exist, argList]
   } else if (exist.length > 0) {
     return exist
   } else if (argList.length > 0) {
     return argList
   } else {
-    return notExist
+    throw new Error(`${notExist[0]} doesn't exist`)
   }
 }
 
