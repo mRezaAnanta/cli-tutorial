@@ -3,6 +3,11 @@
 const process = require('process')
 
 // FIX: the process.argv gets mixed up with the test/index.js
+const availableCommand = {
+  '--start': 'boolean',
+  '--build': 'boolean',
+}
+
 function getArgs(input) {
   // console.log(input + "2")
   const arr = []
@@ -37,11 +42,6 @@ function getArgs(input) {
 }
 
 getArgs(process.argv)
-
-const commandList = {
-  '--start': 'boolean',
-  '--build': 'boolean',
-}
 
 function checkArg(args, commandList) {
   const exist = []
