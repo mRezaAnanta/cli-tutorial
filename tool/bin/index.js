@@ -64,6 +64,8 @@ function checkArg(args, availableCommand) {
   }
 }
 
+function start() {
+  console.log('starting the app')
 }
 
     }
@@ -80,4 +82,5 @@ module.exports = {
   getArgs,
   checkArg,
   availableCommand,
+  start,
 }
