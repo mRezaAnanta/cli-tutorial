@@ -54,7 +54,6 @@ function checkArg(args, availableCommand) {
   }
 
   if (exist.length > 0 && argList.length > 0){
-    return (exist, argList)
     return [exist, argList]
   } else if (exist.length > 0) {
     return exist
@@ -69,6 +68,12 @@ function checkArg(args, availableCommand) {
 
     }
   })
+}
+
+function usage() {
+  console.log(`tool [CMD]
+  --start\tStarts the app
+  --build\tBuilds the app`)
 }
 
 module.exports = {
