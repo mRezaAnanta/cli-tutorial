@@ -16,7 +16,7 @@ function getArgs(input) {
   input.splice(0, 2)
   input.map((args, index) => {
     // console.log(args, index)
-    if(args.slice(0, 2) === "--") {
+    if (args.slice(0, 2) === "--") {
       const arg = args.split("=")
       // console.log(arg)
       const argFlag = arg[0]
@@ -24,15 +24,12 @@ function getArgs(input) {
       const argValue = arg.length > 1 ? arg[1] : true
       // console.log(argValue)
       obj[argFlag] = argValue
-    }
-    else if(args[0] === "-") {
+    } else if (args[0] === "-") {
       const flags = args.slice(1).split("")
       flags.forEach((flag) => {
         obj[flag] = true
       })
-    }
-    else {
-      // obj['arg'] = args
+    } else {
       arr.push(args)
     }
   })
@@ -54,11 +51,10 @@ function checkArg(args, commandList) {
       exist.push(`${index}. ${key}: ${value} (${typeof value})`)
     }
   })
-  console.log(exist, notExist)
 }
 
 module.exports = {
   getArgs,
   checkArg,
-  commandList,
+  availableCommand,
 }
