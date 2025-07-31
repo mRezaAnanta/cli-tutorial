@@ -40,23 +40,23 @@ function checkArg(args, availableCommand) {
   const argList = []
 
   for (const [key, value] of Object.entries(args)) {
-    if (!availableCommand.hasOwnProperty(key) && key != 'arg') {
+    if (!availableCommand.hasOwnProperty(key) && key != 'args') {
       notExist.push(key)
-    } else if (key != 'arg') {
+    } else if (key != 'args') {
       exist.push(key)
     } else if (value.length > 0){
       argList.push(...value)
     }
   }
 
-  if (exist.length > 0 && argList.length > 0){
+  if (notExist.length > 0) {
+    throw new Error(`Unknown or unexpected option: ${notExist[0]} \n`)
+  } else if (exist.length > 0 && argList.length > 0){
     return [exist, argList]
   } else if (exist.length > 0) {
     return exist
   } else if (argList.length > 0) {
     return argList
-  } else {
-    throw new Error(`${notExist[0]} doesn't exist`)
   }
 }
 
@@ -64,8 +64,6 @@ function start() {
   console.log('starting the app')
 }
 
-    }
-  })
 }
 
 function usage() {
