@@ -14,27 +14,23 @@ function getArgs(input) {
   const obj = {}
 
   input.splice(0, 2)
-  input.map((args, index) => {
-    // console.log(args, index)
-    if (args.slice(0, 2) === "--") {
-      const arg = args.split("=")
-      // console.log(arg)
-      const argFlag = arg[0]
-      // console.log(argFlag)
-      const argValue = arg.length > 1 ? arg[1] : true
-      // console.log(argValue)
-      obj[argFlag] = argValue
-    } else if (args[0] === "-") {
-      const flags = args.slice(1).split("")
+  input.map((inp, index) => {
+    if (inp.slice(0, 2) === "--") {
+      let argArray = inp.split("=")
+      let argOption = argArray[0]
+      let argValue = argArray.length > 1 ? argArray[1] : true
+      obj[argOption] = argValue
+    } else if (inp[0] === "-") {
+      let flags = inp.slice(1).split("")
       flags.forEach((flag) => {
         obj[flag] = true
       })
     } else {
-      arr.push(args)
+      arr.push(inp)
     }
   })
   // console.log(arr)
-  obj.arg = arr
+  obj["args"] = arr
   return obj
 }
 
