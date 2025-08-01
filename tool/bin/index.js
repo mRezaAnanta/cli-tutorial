@@ -44,30 +44,18 @@ function getArgs(input) {
   return output
 }
 
-function checkArg(args, availableCommand) {
-  const exist = []
-  const notExist = []
-  const argList = []
-
-  for (const [key, value] of Object.entries(args)) {
-    if (!availableCommand.hasOwnProperty(key) && key != 'args') {
-      notExist.push(key)
-    } else if (key != 'args') {
-      exist.push(key)
-    } else if (value.length > 0){
-      argList.push(...value)
+function checkArg(input, availableCommand) {
+  // if the args obj exist in argList obj then see if typeof is the same
+  // if it doesn't exist then send msg 'this command didn't exist and show command usage
+  for (const [key, value] of Object.entries(input)) {
+    for (const [k, v] of Object.entries(value)) {
+      if (key == 'options' && !availableCommand["options"].hasOwnProperty(k) || key == 'flags' && !availableCommand["flags"].hasOwnProperty(k) || key == 'args' && !availableCommand["args"].hasOwnProperty(v)) {
+        // args key will give index number since it's value is an array
+        throw new Error(`Unknown or unexpected option: ${k >= 0 ? v : k} \n`)
+      }
     }
   }
-
-  if (notExist.length > 0) {
-    throw new Error(`Unknown or unexpected option: ${notExist[0]} \n`)
-  } else if (exist.length > 0 && argList.length > 0){
-    return [exist, argList]
-  } else if (exist.length > 0) {
-    return exist
-  } else if (argList.length > 0) {
-    return argList
-  }
+  return input
 }
 
 function start() {
