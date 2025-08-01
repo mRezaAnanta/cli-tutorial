@@ -2,10 +2,17 @@
 // console.log('hello tool')
 const process = require('process')
 
-// FIX: the process.argv gets mixed up with the test/index.js
 const availableCommand = {
-  '--start': 'boolean',
-  '--build': 'boolean',
+  'options': {
+    '--start': 'boolean',
+    '--build': 'boolean',
+  },
+  'flags': {
+    'a': 'boolean',
+  },
+  'args': {
+    'publish': 'string',
+  }
 }
 
 function getArgs(input) {
