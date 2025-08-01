@@ -16,9 +16,10 @@ const availableCommand = {
 }
 
 function getArgs(input) {
-  // console.log(input + "2")
-  const arr = []
-  const obj = {}
+  const optionObj = {}
+  const flagObj = {}
+  const argArr = []
+  const output = {}
 
   input.splice(0, 2)
   input.map((inp, index) => {
@@ -26,19 +27,21 @@ function getArgs(input) {
       let argArray = inp.split("=")
       let argOption = argArray[0]
       let argValue = argArray.length > 1 ? argArray[1] : true
-      obj[argOption] = argValue
+      optionObj[argOption] = argValue
     } else if (inp[0] === "-") {
       let flags = inp.slice(1).split("")
       flags.forEach((flag) => {
-        obj[flag] = true
+        flagObj[flag] = true
       })
     } else {
-      arr.push(inp)
+      argArr.push(inp)
     }
   })
-  // console.log(arr)
-  obj["args"] = arr
-  return obj
+  output["options"] = optionObj
+  output["flags"] = flagObj
+  output["args"] = argArr
+  console.log(output)
+  return output
 }
 
 function checkArg(args, availableCommand) {
