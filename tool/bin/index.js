@@ -60,22 +60,22 @@ function getArgs(input) {
   return output
 }
 
-// get args and iterate the key and see if the args exist in availableCommand
+// get args and iterate the key and see if the args exist in availableCommand and return the value of each arg function inside of availableCommand
 function executeCommand(input) {
-  let cmd
+  let cmd = {}
 
   for (const [key, value] of Object.entries(input)) {
     for (const [k, v] of Object.entries(value)) {
       if (key == 'args') {
         if (!availableCommand[key].hasOwnProperty(v)) throw new Error(`Unknown or unexpected option: ${v} \n`)
-        cmd = availableCommand[key][v]
+        cmd[k] = availableCommand[key][v](v)
       } else {
         if (!availableCommand[key].hasOwnProperty(k)) throw new Error(`Unknown or unexpected option: ${k} \n`)
-        cmd = availableCommand[key][k]
+        cmd[k] = availableCommand[key][k](v)
       }
-      cmd(v)
     }
   }
+  return Object.values(cmd)
 }
 
 // list available command if you use wrong command
