@@ -24,6 +24,8 @@ const availableCommand = {
   }
 }
 
+
+// get args and split it between options, flags or args
 function getArgs(input) {
   const optionObj = {}
   const flagObj = {}
@@ -52,9 +54,20 @@ function getArgs(input) {
   return output
 }
 
+// get args and iterate the key and see if the args exist in availableCommand
+function executeCommand(input) {
+  let cmd
+
   for (const [key, value] of Object.entries(input)) {
     for (const [k, v] of Object.entries(value)) {
+      if (key == 'args') {
+        if (!availableCommand[key].hasOwnProperty(v)) throw new Error(`Unknown or unexpected option: ${v} \n`)
+        cmd = availableCommand[key][v]
+      } else {
+        if (!availableCommand[key].hasOwnProperty(k)) throw new Error(`Unknown or unexpected option: ${k} \n`)
+        cmd = availableCommand[key][k]
       }
+      cmd(v)
     }
   }
 }
@@ -66,4 +79,5 @@ function usage() {
 module.exports = {
   getArgs,
   availableCommand,
+  executeCommand,
 }
