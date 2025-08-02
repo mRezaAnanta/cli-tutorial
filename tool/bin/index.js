@@ -73,9 +73,7 @@ function start() {
 }
 
 function usage() {
-  console.log(`tool [CMD]
-  --start\tStarts the app
-  --build\tBuilds the app`)
+  console.log(`tool [CMD]\n --start\tStarts the app\n --build\tBuilds the app`)
 }
 
 module.exports = {
