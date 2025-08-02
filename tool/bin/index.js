@@ -24,6 +24,13 @@ const availableCommand = {
   }
 }
 
+try {
+  const getArgument = getArgs(process.argv)
+  const cmd = executeCommand(getArgument)
+} catch (err) {
+  console.log(err.message)
+  usage()
+}
 
 // get args and split it between options, flags or args
 function getArgs(input) {
