@@ -28,7 +28,7 @@ try {
   const cmd = executeCommand(getArgument)
 } catch (err) {
   console.log(err.message)
-  usage()
+  console.log(usage())
 }
 
 // get args and split it between options, flags or args
@@ -78,8 +78,9 @@ function executeCommand(input) {
   }
 }
 
+// list available command if you use wrong command
 function usage() {
-  console.log(`tool [CMD]\n --start\tStarts the app\n --build\tBuilds the app`)
+  return `tool [CMD]\n --start\tStarts the app\n --build\tBuilds the app`
 }
 
 module.exports = {
