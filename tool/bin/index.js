@@ -5,21 +5,20 @@ const process = require('process')
 const availableCommand = {
   'options': {
     '--start': (data) => {
-      // console.log(`${data == null || data == undefined ? "starting the app" : "starting the app with data"}`)
-      console.log(data == null || data == undefined ? "starting the app" : `starting the app with ${data}`)
+      return data == null || data == undefined ? "starting the app" : `starting the app with ${data}`
     },
     '--build': (data) => {
-      console.log(`building the app`)
+      return `building the app`
     },
   },
   'flags': {
     'a': () => {
-      console.log(`just a lol`)
+      return `just a lol`
     },
   },
   'args': {
     'publish': () => {
-      console.log('publish now')
+      return 'publish now'
     },
   }
 }
