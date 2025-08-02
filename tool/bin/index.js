@@ -4,14 +4,23 @@ const process = require('process')
 
 const availableCommand = {
   'options': {
-    '--start': 'boolean',
-    '--build': 'boolean',
+    '--start': (data) => {
+      // console.log(`${data == null || data == undefined ? "starting the app" : "starting the app with data"}`)
+      console.log(data == null || data == undefined ? "starting the app" : `starting the app with ${data}`)
+    },
+    '--build': (data) => {
+      console.log(`building the app`)
+    },
   },
   'flags': {
-    'a': 'boolean',
+    'a': () => {
+      console.log(`just a lol`)
+    },
   },
   'args': {
-    'publish': 'string',
+    'publish': () => {
+      console.log('publish now')
+    },
   }
 }
 
