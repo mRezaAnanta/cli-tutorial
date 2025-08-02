@@ -26,12 +26,12 @@ function getArgs(input) {
     if (inp.slice(0, 2) === "--") {
       let argArray = inp.split("=")
       let argOption = argArray[0]
-      let argValue = argArray.length > 1 ? argArray[1] : true
+      let argValue = argArray.length > 1 ? argArray[1] : null
       optionObj[argOption] = argValue
     } else if (inp[0] === "-") {
       let flags = inp.slice(1).split("")
       flags.forEach((flag) => {
-        flagObj[flag] = true
+        flagObj[flag] = null
       })
     } else {
       argArr.push(inp)
@@ -40,7 +40,6 @@ function getArgs(input) {
   output["options"] = optionObj
   output["flags"] = flagObj
   output["args"] = argArr
-  console.log(output)
   return output
 }
 
